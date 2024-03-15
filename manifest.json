@@ -1,0 +1,40 @@
+{
+    "manifest_version": 2,
+    "name": "CuotaUCI",
+    "version": "2.0.2",
+    "description": "Información sobre el estado de la cuota UCI. Activar o desactivar el proxy del navegador para el usuario seleccionado",
+    "permissions": [
+        "https://cuota.uci.cu/php/cuota.php",
+        "webRequest",
+        "webRequestBlocking",
+        "storage",
+        "proxy",
+        "<all_urls>"
+    ],
+    "browser_specific_settings": {
+        "gecko": {
+            "strict_min_version": "91.1.0"
+        }
+    },
+    "icons": {
+        "48": "icons/proxy_on_48.svg"
+    },
+    "default_locale": "es",
+    "browser_action": {
+        "default_icon": {
+            "48": "icons/proxy_on_48.svg"
+        },
+        "browser_style": true,
+        "default_popup": "popup/cuota_popup.html"
+    },
+    "options_ui": {
+        "page": "options/options.html",
+        "browser_style": true
+    },
+    "background": {
+        "scripts": [
+            "background.js"
+        ],
+        "persistent": true
+    }
+}
