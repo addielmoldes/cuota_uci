@@ -1,65 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="css/options.css">
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-    </head>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+</head>
 
-    <body>
-        <header>
-            <nav class="navbar bg-light border">
-                <div class="container-fluid">
+<body>
+<header>
+  <nav class="navbar bg-light border">
+    <div class="container-fluid">
                     <span href="#" class="navbar-brand text-secondary d-flex align-items-center gap-2">
                         <img src="/icons/proxy_on_48.svg" alt="cuota_icono" class="d-inline-block align-text-top"
-                            width="24" height="24"> Cuota UCI </span>
-                    <div class="d-flex">
-                        <input type="text" name="idc" id="idc" class="form-control me-2 fs-4"
-                            placeholder="Identificador" aria-label="Identificador">
-                        <button type="button" class="btn btn-outline-success me-2" title="Añadir" id="addc">
-                            <img src="/icons/add_black_24dp.svg" alt="add" width="20">
-                        </button>
-                        <button type="button" class="btn btn-outline-danger" title="Eliminar" id="delc">
-                            <img src="/icons/delete_black_24dp.svg" alt="del" width="20">
-                        </button>
-                    </div>
-                </div>
-            </nav>
-        </header>
-        <div class="row col-12">
-            <aside class="col-3">
-                <div class="fs-4">
-                    <ul class="list-group list-group-flush" id="listContainer"></ul>
-                </div>
-            </aside>
-            <section class="col-8" id="container">
-                <div class="border rounded shadow p-2 w-75 m-auto mt-4 mb-4 bg-light bg-gradient fs-4">
-                    <div class="m-3">
-                        <label for="username" class="form-label text-secondary">Usuario</label>
-                        <input type="text" name="username" id="username" class="form-control fs-4">
-                    </div>
-                    <div class="m-3">
-                        <label for="userpassword" class="form-label text-secondary">Contraseña</label>
-                        <div class="input-group">
-                            <input type="password" name="userpassword" id="userpassword" class="form-control fs-4"
-                                aria-describedby="seePass">
-                            <button class="btn btn-outline-light border-top border-bottom border-end" id="seePass"><img
-                                    src="/icons/visibility_black_24dp.svg" alt="ver" width="18"></button>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                             width="24" height="24"> Cuota UCI </span>
+      <div class="d-flex">
+        <input type="text" name="idc" id="idc" class="form-control me-2 fs-4"
+               placeholder="Identificador" aria-label="Identificador">
+        <button type="button" class="btn btn-outline-success me-2" title="Añadir" id="addc">
+          <img src="/icons/add_black_24dp.svg" alt="add" width="20">
+        </button>
+        <button type="button" class="btn btn-outline-danger" title="Eliminar" id="delc">
+          <img src="/icons/delete_black_24dp.svg" alt="del" width="20">
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="row col-12">
+  <aside class="col-3">
+    <div class="fs-4">
+      <ul class="list-group list-group-flush" id="listContainer"></ul>
+    </div>
+  </aside>
+  <section class="col-8" id="container">
+    <div class="border rounded shadow p-2 w-75 m-auto mt-4 mb-4 bg-light bg-gradient fs-4">
+      <div class="m-3">
+        <label for="username" class="form-label text-secondary">Usuario</label>
+        <input type="text" name="username" id="username" class="form-control fs-4">
+      </div>
+      <div class="m-3">
+        <label for="userpassword" class="form-label text-secondary">Contraseña</label>
+        <div class="input-group">
+          <input type="password" name="userpassword" id="userpassword" class="form-control fs-4"
+                 aria-describedby="seePass">
+          <button class="btn btn-outline-light border-top border-bottom border-end" id="seePass"><img
+                  src="/icons/visibility_black_24dp.svg" alt="ver" width="18"></button>
         </div>
-        <footer class="bg-light navbar border">
-            <div class="w-100 text-secondary">
-                <small class="fs-6 ms-2">&copy;2023 Addiel Moldes</small>
-                <small class="fs-6 float-end me-2">v2.0.2</small>
-            </div>
-        </footer>
-        <script src="js/options.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery-3.6.0.min.js"></script>
-    </body>
+      </div>
+    </div>
+  </section>
+</div>
+<footer class="bg-light navbar border">
+  <div class="w-100 text-secondary">
+    <small class="fs-6 ms-2">&copy;2024 Addiel Moldes</small>
+    <small class="fs-6 float-end me-2">v2.0.2</small>
+  </div>
+</footer>
+<script src="../assets/js/jquery-3.6.0.min.js"></script>
+<script src="../assets/js/options.js"></script>
+<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
 
 </html>
