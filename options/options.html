@@ -1,61 +1,99 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-bs-theme="light">
 
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+  <title>Opciones</title>
 </head>
 
 <body>
 <header>
-  <nav class="navbar bg-light border">
+  <nav class="navbar bg-body-tertiary border border-light-subtle">
     <div class="container-fluid">
-                    <span href="#" class="navbar-brand text-secondary d-flex align-items-center gap-2">
-                        <img src="/icons/proxy_on_48.svg" alt="cuota_icono" class="d-inline-block align-text-top"
-                             width="24" height="24"> Cuota UCI </span>
+      <span href="#" class="navbar-brand text-secondary d-flex align-items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             class="icon icon-tabler icons-tabler-outline icon-tabler-affiliate">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M5.931 6.936l1.275 4.249m5.607 5.609l4.251 1.275"/>
+          <path d="M11.683 12.317l5.759 -5.759"/>
+          <path d="M5.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"/>
+          <path d="M18.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"/>
+          <path d="M18.5 18.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"/>
+          <path d="M8.5 15.5m-4.5 0a4.5 4.5 0 1 0 9 0a4.5 4.5 0 1 0 -9 0"/>
+        </svg>
+        Cuota UCI
+      </span>
+
       <div class="d-flex">
-        <input type="text" name="idc" id="idc" class="form-control me-2 fs-4"
-               placeholder="Identificador" aria-label="Identificador">
-        <button type="button" class="btn btn-outline-success me-2" title="Añadir" id="addc">
-          <img src="/icons/add_black_24dp.svg" alt="add" width="20">
+        <input type="text" name="idc" id="idc" class="form-control me-2" placeholder="Identificador"
+               aria-label="Identificador">
+
+        <button type="button" class="btn bg-success-subtle me-2" title="Añadir" id="addAccountBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 5l0 14"/>
+            <path d="M5 12l14 0"/>
+          </svg>
         </button>
-        <button type="button" class="btn btn-outline-danger" title="Eliminar" id="delc">
-          <img src="/icons/delete_black_24dp.svg" alt="del" width="20">
+
+        <button type="button" class="btn bg-danger-subtle" title="Eliminar" id="delAccountBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M4 7l16 0"/>
+            <path d="M10 11l0 6"/>
+            <path d="M14 11l0 6"/>
+            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"/>
+            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"/>
+          </svg>
         </button>
       </div>
     </div>
   </nav>
 </header>
+
 <div class="row col-12">
   <aside class="col-3">
-    <div class="fs-4">
-      <ul class="list-group list-group-flush" id="listContainer"></ul>
-    </div>
+    <ul class="list-group list-group-flush" id="listContainer"></ul>
   </aside>
-  <section class="col-8" id="container">
-    <div class="border rounded shadow p-2 w-75 m-auto mt-4 mb-4 bg-light bg-gradient fs-4">
+
+  <section class="col-8 container" id="container">
+    <div class="border border-light-subtle rounded shadow-sm p-2 w-75 m-auto my-4 bg-body-tertiary">
       <div class="m-3">
         <label for="username" class="form-label text-secondary">Usuario</label>
-        <input type="text" name="username" id="username" class="form-control fs-4">
+        <input type="text" name="username" id="username" class="form-control">
       </div>
       <div class="m-3">
         <label for="userpassword" class="form-label text-secondary">Contraseña</label>
-        <div class="input-group">
-          <input type="password" name="userpassword" id="userpassword" class="form-control fs-4"
-                 aria-describedby="seePass">
-          <button class="btn btn-outline-light border-top border-bottom border-end" id="seePass"><img
-                  src="/icons/visibility_black_24dp.svg" alt="ver" width="18"></button>
+        <div class="input-group text-secondary">
+          <input type="password" name="userpassword" id="userpassword" class="form-control">
+          <button class="btn bg-white border-top border-bottom border-end text-secondary" id="seePassBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="icon icon-tabler icons-tabler-outline icon-tabler-eye">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/>
+              <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"/>
+            </svg>
+          </button>
         </div>
       </div>
     </div>
   </section>
 </div>
-<footer class="bg-light navbar border">
+
+<footer class="bg-body-tertiary navbar border border-light-subtle">
   <div class="w-100 text-secondary">
     <small class="fs-6 ms-2">&copy;2024 Addiel Moldes</small>
-    <small class="fs-6 float-end me-2">v2.0.2</small>
+    <small class="fs-6 float-end me-2">3.0</small>
   </div>
 </footer>
+
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
 <script src="../assets/js/options.js"></script>
 <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
