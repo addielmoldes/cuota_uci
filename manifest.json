@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "CuotaUCI",
-    "version": "3",
+    "version": "3.0.1",
     "description": "Información sobre el estado de la cuota UCI. Activar o desactivar el proxy del navegador para el usuario seleccionado",
     "permissions": [
         "https://cuota.uci.cu/php/cuota.php",
