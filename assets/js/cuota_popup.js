@@ -1,29 +1,35 @@
 function makeRequest() {
     function getFields(cuotas) {
         for (let cuota in cuotas) {
-            let username = cuotas[cuota].username;
-            let userpassword = cuotas[cuota].userpassword;
-            let proxy = cuotas[cuota].proxy;
-            $.ajax({
-                method: 'POST',
-                url: 'https://cuota.uci.cu/php/cuota.php',
-                data: { username: username, userpassword: userpassword },
-                success: function (data) {
-                    buildCuota(data, username, userpassword, proxy);
+            if (cuota !== 'proxy') {
+                let username = cuotas[cuota].username;
+                let userpassword = cuotas[cuota].userpassword;
+                let proxy = cuotas[cuota].proxy;
+                $.ajax({
+                    method: 'POST',
+                    url: 'https://cuota.uci.cu/php/cuota.php',
+                    data: { username: username, userpassword: userpassword },
+                    success: function (data) {
+                        buildCuota(data, username, userpassword, proxy);
 
-                    //Controlar overflow
-                    if (document.body.scrollHeight > document.body.clientHeight) {
-                        document.body.style.paddingRight = '15px';
-                        document.body.style.overflowX = 'hidden';
-                    } else {
-                        document.body.style.paddingRight = '0';
+                        //Controlar overflow
+                        if (document.body.scrollHeight > document.body.clientHeight) {
+                            document.body.style.paddingRight = '15px';
+                            document.body.style.overflowX = 'hidden';
+                        } else {
+                            document.body.style.paddingRight = '0';
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error.statusText);
+                        document.querySelector('#user').style.fontSize = '20px';
                     }
-                },
-                error: function (error) {
-                    console.log(error.statusText);
-                    document.querySelector('#user').style.fontSize = '20px';
-                }
-            });
+                });
+            } else {
+                $('#custom').prop('checked', cuotas[cuota].proxy === 'true');
+                $('#ipAddress').val(cuotas[cuota].ip);
+                $('#port').val(cuotas[cuota].port);
+            }
         }
     }
 
@@ -31,7 +37,7 @@ function makeRequest() {
         console.log('Error: ' + $(error));
     }
 
-    var cuotas = browser.storage.local.get();
+    let cuotas = browser.storage.local.get();
     cuotas.then(getFields, onError);
 }
 
@@ -54,7 +60,7 @@ function buildCuota(data, username, userpassword, proxyInfo) {
     proxy.setAttribute('type', 'radio');
     proxy.className = 'form-check-input';
     proxy.name = 'proxy';
-    if (proxyInfo == 'true')
+    if (proxyInfo === 'true')
         proxy.checked = true;
     proxyContainer.appendChild(proxy);
 
@@ -100,7 +106,7 @@ function buildCuota(data, username, userpassword, proxyInfo) {
 
         //Obtener la hora estimada
         let cur_time = new Date().getHours();
-        let rem_time = cur_time % 2 == 0 ? Math.ceil(info.data.cuota_usada / info.data.cuota) : Math.floor(info.data.cuota_usada / info.data.cuota);
+        let rem_time = cur_time % 2 === 0 ? Math.ceil(info.data.cuota_usada / info.data.cuota) : Math.floor(info.data.cuota_usada / info.data.cuota);
         let exp_time = cur_time + rem_time;
 
         //Contar días
@@ -112,13 +118,13 @@ function buildCuota(data, username, userpassword, proxyInfo) {
         }
 
         //Corregir paridad
-        if (exp_time % 2 != 0)
+        if (exp_time % 2 !== 0)
             exp_time += 1;
 
         //Obtener el dia exacto
-        var currentDate = new Date();
-        var millisecondsPerDay = 24 * 60 * 60 * 1000;
-        var targetDate = new Date(currentDate.getTime() + (days * millisecondsPerDay));
+        let currentDate = new Date();
+        let millisecondsPerDay = 24 * 60 * 60 * 1000;
+        let targetDate = new Date(currentDate.getTime() + (days * millisecondsPerDay));
 
         //Actualizar periodo
         if (exp_time <= 12)
@@ -168,15 +174,26 @@ function buildCuota(data, username, userpassword, proxyInfo) {
 function updateProxyStatus() {
     function updateProxy(cuotas) {
         for (let cuota in cuotas) {
-            if (cuotas[cuota].proxy == 'true') {
+            if (cuotas[cuota].proxy === 'true' && cuota !== 'proxy') {
                 let json = JSON.parse('{"' + cuota + '": {"username": "' + cuotas[cuota].username + '", "userpassword": "' + cuotas[cuota].userpassword + '", "proxy": "' + false + '"} }');
-                browser.storage.local.set(json);
+                browser.storage.local.set(json).then();
             }
-            if (cuotas[cuota].username == cuenta.id) {
+            if (cuotas[cuota].username === cuenta.id) {
                 let json = JSON.parse('{"' + cuota + '": {"username": "' + cuotas[cuota].username + '", "userpassword": "' + cuotas[cuota].userpassword + '", "proxy": "' + true + '"} }');
-                browser.storage.local.set(json);
+                browser.storage.local.set(json).then();
 
-                localStorage.setItem("credentials", `${cuotas[cuota].username},${cuotas[cuota].userpassword}`);
+                localStorage.setItem("credentials", `${cuotas[cuota].username}, ${cuotas[cuota].userpassword}`);
+            }
+            if (cuota === 'proxy' && cuotas[cuota].proxy === 'true') {
+                cuenta.id === 'custom' ? cuotas[cuota].proxy = 'true' : cuotas[cuota].proxy = 'false';
+                const proxy = {
+                    proxy: {
+                        ip: cuotas[cuota].ip,
+                        port: cuotas[cuota].port,
+                        proxy: cuotas[cuota].proxy
+                    }
+                }
+                browser.storage.local.set(proxy).then();
             }
         }
     }
@@ -185,7 +202,7 @@ function updateProxyStatus() {
         console.log('Error: ' + $(error));
     }
 
-    var cuotas = browser.storage.local.get();
+    let cuotas = browser.storage.local.get();
     cuotas.then(updateProxy, onError);
 }
 
@@ -195,37 +212,71 @@ function setProxy() {
             proxyType: "manual",
             http: "10.0.0.1:8080",
             httpProxyAll: true,
-            passthrough: "localhost, *uci.cu, *uclv.cu, *uclv.edu.cu",
+            passthrough: "localhost, *uci.cu",
             autoLogin: true,
         }
-    });
+    }).then();
+}
+
+function addProxy() {
+    let ipAddress = $('#ipAddress').val();
+    let port = $('#port').val();
+
+    const proxy = {
+        proxy: {
+            ip: ipAddress,
+            port: port,
+            proxy: "true"
+        }
+    }
+    browser.storage.local.set(proxy).then();
+}
+
+function setCustomProxy() {
+    let ipAddress = $('#ipAddress').val();
+    let port = $('#port').val();
+    browser.proxy.settings.set({
+        value: {
+            proxyType: "manual",
+            http: `${ipAddress}:${port}`,
+            httpProxyAll: true,
+            passthrough: "localhost, *uci.cu"
+        }
+    }).then();
 }
 
 function clearProxy() {
     browser.proxy.settings.set({
         value: {
             proxyType: 'system',
-            passthrough: "localhost, *uci.cu, *uclv.cu, *uclv.edu.cu"
+            passthrough: "localhost, *uci.cu"
         }
-    });
+    }).then();
 }
 
-document.addEventListener('DOMContentLoaded', makeRequest);
+let cuenta = "";
+$(() => {
+    makeRequest();
 
-var cuenta;
-$('#container').click((evt) => {
-    if (evt.target && evt.target.matches('input[name="proxy"')) {
-        cuenta = evt.target;
-        updateProxyStatus();
-        if (cuenta.id != 'direct')
-            setProxy();
-    }
-})
+    $('#ipAddress').inputmask('ip');
 
-document.querySelector('#direct').addEventListener('click', () => {
-    let direct = document.querySelector('#direct');
+    $('#container').on('click', (event) => {
+        if (event.target && event.target.matches('input[name="proxy"]')) {
+            cuenta = event.target;
+            updateProxyStatus();
+            if (cuenta.id !== 'direct' && cuenta.id !== 'custom') {
+                setProxy();
+            }
+            else if (cuenta.id === 'custom') {
+                addProxy();
+                setCustomProxy();
+            }
+        }
+    });
 
-    if (direct.value == 'on') {
-        clearProxy();
-    }
+    $('#direct').on('click', function () {
+        if ($(this).val() === 'on') {
+            clearProxy();
+        }
+    });
 });

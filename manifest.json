@@ -17,12 +17,12 @@
         }
     },
     "icons": {
-        "48": "assets/icons/logo_48.svg"
+        "48": "assets/icons/logo.svg"
     },
     "default_locale": "es",
     "browser_action": {
         "default_icon": {
-            "48": "assets/icons/logo_48.svg"
+            "48": "assets/icons/logo.svg"
         },
         "browser_style": true,
         "default_popup": "popup/cuota_popup.html"

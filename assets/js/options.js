@@ -83,18 +83,19 @@ function updateList() {
         let listContainer = document.querySelector('#listContainer');
         listContainer.innerHTML = '';
         for (let cuota in cuotas) {
-            let newItem = document.createElement('li');
 
-            newItem.setAttribute('id', 'items');
-            newItem.textContent = cuota;
-            if (typeof cuenta != 'undefined' && cuota === cuenta) {
-                newItem.className = 'list-group-item active';
-                document.querySelector('#username').value = '';
-                document.querySelector('#userpassword').value = '';
+            if (cuota !== 'proxy') {
+                let newItem = document.createElement('li');
+                newItem.setAttribute('id', 'items');
+                newItem.textContent = cuota;
+                if (typeof cuenta != 'undefined' && cuota === cuenta) {
+                    newItem.className = 'list-group-item active';
+                    document.querySelector('#username').value = '';
+                    document.querySelector('#userpassword').value = '';
+                } else
+                    newItem.className = 'list-group-item';
+                listContainer.appendChild(newItem);
             }
-            else
-                newItem.className = 'list-group-item';
-            listContainer.appendChild(newItem);
         }
     }
 
